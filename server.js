@@ -44,3 +44,35 @@ app.get('/collectibles/:index', (req,res) => {
     }
 });
 
+//Q4
+const shoes = [
+    { name: "Birkenstocks", price: 50, type: "sandal" },
+    { name: "Air Jordans", price: 500, type: "sneaker" },
+    { name: "Air Mahomeses", price: 501, type: "sneaker" },
+    { name: "Utility Boots", price: 20, type: "boot" },
+    { name: "Velcro Sandals", price: 15, type: "sandal" },
+    { name: "Jet Boots", price: 1000, type: "boot" },
+    { name: "Fifty-Inch Heels", price: 175, type: "heel" }
+];
+app.get('/shoes', (req,res) => {
+    let result = shoes;
+    const minPrice = parseFloat(req.query['min-price']);
+    const maxPrice = parseFloat(req.query['max-price']);
+    const type = req.query.type;
+
+    //filtering min price
+    if(!isNaN(minPrice)){
+        result = result.filter(shoe => shoe.price >= minPrice);
+    }
+    //filtering max price
+    if(!isNaN(maxPrice)){
+        result = result.filter(shoe => shoe.price <= maxPrice);
+    }
+    //filtering type
+    if(type){
+        result = result.filter(shoe => shoe.type === type);
+    }
+    res.send(result);
+})
+
+
