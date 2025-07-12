@@ -16,5 +16,18 @@ app.get('/greatings/:username',(req,res) => {
 });
 
 //Q2
+app.get('/roll/:number', (req,res) => {
+    const number = req.params.number;
+    const numVal = parseInt(number, 10);
+    if (isNaN(numVal)){
+        res.send("You must specify a number.");
+    }else{
+        const randomNum = Math.floor(Math.random() * (numVal + 1));
+        res.send(`You rolled a ${randomNum}.`);
+
+    }
+})
+
+//Q3
 
 
